@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- xml 주석 -->
+ <!-- db는 슬래시+아스테리스크 주석. 
+  화살표 주석과 아스테리스크 주석 같이 쓰면 에러남
+  띄어쓰기도 꼭 확인하기 -->
+    
+ <mapper namespace="ksmybatis.admin.common.mapper.CommonMapper">
+  <resultMap type="ksmybatis.admin.common.domain.CommonCode" id="commonResultMap">
+ 		<id 	column="comm_group_cd" 			property="commonGroupCode" />
+		<id 	column="comm_cd" 				property="commonCode" />
+		<result column="comm_group_eng_nm" 		property="commonGroupEngName" />
+		<result column="comm_nm" 				property="commonName" />
+		<result column="comm_eng_nm" 			property="commonEngName" />
+		<result column="comm_cd_use_yn" 		property="commonCodeUseYN" />
+		<result column="comm_cd_reg_date" 		property="commonCodeRegDate" />
+  </resultMap>
+
+	 <select id="getCommonCodeListByGroupCode" resultMap="commonResultMap">
+	 /* 그룹코드에 일치하는 공통코드 목록조회 */
+		 SELECT
+			cgc.comm_group_cd,
+			cgc.comm_group_nm,
+			cgc.comm_group_eng_nm,
+			cc.comm_cd,
+			cc.comm_nm,
+			cc.comm_eng_nm,
+			cc.comm_cd_use_yn,
+			cc.comm_cd_reg_date
+		FROM
+			comm_group_code cgc inner join comm_code cc
+			using(comm_group_cd)
+		where
+		cgc.comm_group_cd = #{groupCode};
+	 </select>
+	 
+	<!--  <select id="getMemberList" resultType="Member">
+	 /* 회원목록조회 */
+		 SELECT
+			mbr_id 			AS memberId,
+			mbr_pw			AS memberPw,
+			mbr_name		AS memberName,
+			mbr_grd			AS memberLevel,
+			cc.comm_nm		AS memberLevelName,
+			mbr_addr		AS memberAddress,
+			mbr_daddr		AS memberDAddress,
+			mbr_zip			AS memberZip,
+			mbr_telno		AS memberTelNo,
+			mbr_email		AS memberEmail,
+			mbr_reg_date 	AS memberRegDate
+		FROM
+			members m INNER JOIN comm_code cc
+			ON m.mbr_grd = cc.comm_cd
+		ORDER BY CAST(substring_index(mbr_id,'ksmartid',-1) AS unsigned);
+	 </select> -->
+	 
+ </mapper>

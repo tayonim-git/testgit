@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin/layout/layout_main}">
+	  <head>
+	  <meta name="description" content="한국스마트정보교육원 mybatis" />
+	  </head>
+	  
+	  
+        <!-- 추가할 js file -->
+        <th:block layout:fragment="jsFile">
+        	<script src="/manage/assets/js/vendors/chart.js"></script>
+        </th:block>
+        
+        <!-- 추가할 script file -->
+        <th:block layout:fragment="jsScript">
+        </th:block>
+       
+	  
+	  <!-- 추가할 페이지 contents -->
+	  <th:block layout:fragment="contents">
+	  		<div class="content-header">
+                    <div>
+                        <h2 class="content-title card-title">메인 화면</h2>
+                        <p>관리자 페이지</p>
+                    </div>
+                </div>
+	  </th:block>
+	  
+</html>
